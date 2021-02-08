@@ -35,7 +35,7 @@ class RegionLoss(nn.modules.loss._Loss):
         object_scale (optional, float): weight of regions with target boxes; Default **5.0**
         class_scale (optional, float): weight of categorical predictions; Default **1.0**
         thresh (optional, float): minimum iou between a predicted box and ground truth for them to be considered matching; Default **0.6**
-        coord_prefill (optional, int): This parameter controls for how many images the network will prefill the target coordinates, biassing the network to predict the center at **.5,.5**; Default **12800**
+        coord_prefill (optional, int): This parameter controls for how many training samples the network will prefill the target coordinates, biassing the network to predict the center at **.5,.5**; Default **12800**
     """
     def __init__(self, num_classes, anchors, stride=32, seen=0, coord_scale=1.0, noobject_scale=1.0, object_scale=5.0, class_scale=1.0, thresh=0.6, coord_prefill=12800):
         super().__init__()
