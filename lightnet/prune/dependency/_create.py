@@ -167,6 +167,15 @@ def create_elemw_op(element, graph, model, rootnode, parent):
 def create_ignore(element, graph, model, rootnode, parent):
     name = onnx.helper.printable_attribute(element.attribute[0]).split('=')[-1].strip()
     node = Node(NodeType.IGNORE, name, metadata=(set(element.input), set(element.output)))
+
+    if name == '"flip"':
+        inputs = [i for i in element.input if len(i) > 0]
+        for gn in graph.node:
+            if gn.output[0] in inputs and gn.op_type == 'Constant':
+                value = onnx_numpy_helper.to_array(onnx.helper.get_attribute_value(gn.attribute[0]))
+                if value == 1:
+                    raise NotImplementedError(f'ATen: flip (Flipping on channel dimension [1])')
+
     if parent is not None:
         parent.add_child(node)
 

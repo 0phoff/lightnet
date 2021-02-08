@@ -71,20 +71,42 @@ def add_nodetype_operation(name, node_type, aten=True):
 
 # Default maps
 node_type_map_aten = {
-    NodeType.CONV:          {'_convolution'},
-    NodeType.BATCHNORM:     {'batch_norm'},
-    NodeType.CONCAT:        {'cat'},
-    NodeType.ELEMW_OP:      {'add'},
-    NodeType.IGNORE:        {'leaky_relu', 'relu', 'max_pool2d', 'upsample_nearest2d'},
-    NodeType.IGNORE_STOP:   {'size'},
+    NodeType.CONV: {
+        '_convolution',
+    },
+    NodeType.BATCHNORM: {
+        'batch_norm',
+    },
+    NodeType.CONCAT: {
+        'cat',
+    },
+    NodeType.ELEMW_OP: {
+        'add',
+    },
+    NodeType.IGNORE: {
+        'leaky_relu',
+        'relu',
+        'hardtanh',
+        'adaptive_avg_pool2d',
+        'max_pool2d',
+        'cummax',
+        'upsample_nearest2d',
+        'replication_pad2d',
+        'flip',
+    },
+    NodeType.IGNORE_STOP: {
+        'size',
+    },
 }
 
 
 node_type_map_onnx = {
-    NodeType.CONV:          set(),
-    NodeType.BATCHNORM:     set(),
-    NodeType.CONCAT:        set(),
-    NodeType.ELEMW_OP:      set(),
-    NodeType.IGNORE:        set(),
-    NodeType.IGNORE_STOP:   {'Concat'},
+    NodeType.CONV: set(),
+    NodeType.BATCHNORM: set(),
+    NodeType.CONCAT: set(),
+    NodeType.ELEMW_OP: set(),
+    NodeType.IGNORE: set(),
+    NodeType.IGNORE_STOP: {
+        'Concat',
+    },
 }
