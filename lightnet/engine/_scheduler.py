@@ -22,21 +22,21 @@ class SchedulerCompositor:
         ...     " Dummy scheduler that does nothing but print it's id value. "
         ...     def __init__(self, id_value):
         ...         self.id = id_value;
-        ...     def step(self, count_value=0):
-        ...         print(f'{count_value} - Dummy Scheduler: {self.id}')
+        ...     def step(self):
+        ...         print(f'{self.last_epoch} - Dummy Scheduler: {self.id}')
         >>> s = ln.engine.SchedulerCompositor(
-        ...     (0, DummyScheduler('start')),
-        ...     (2, DummyScheduler('middle')),
-        ...     (3, DummyScheduler('end')),
+        ...     (1, DummyScheduler('start')),
+        ...     (3, DummyScheduler('middle')),
+        ...     (4, DummyScheduler('end')),
         ... )
         >>> # Note that then "count_value" argument is just for this example
         >>> for i in range(5):
-        ...     s.step(count_value=i)
-        0 - Dummy Scheduler: start
+        ...     s.step()
         1 - Dummy Scheduler: start
-        2 - Dummy Scheduler: middle
-        3 - Dummy Scheduler: end
+        2 - Dummy Scheduler: start
+        3 - Dummy Scheduler: middle
         4 - Dummy Scheduler: end
+        5 - Dummy Scheduler: end
     """
     def __init__(self, *args, last_epoch=0):
         if len(args) == 0:
