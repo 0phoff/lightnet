@@ -87,9 +87,6 @@ class Pruner(ABC):
                     buf.grad = None
 
             # Prune
-            if percentage > 1:
-                percentage /= 100
-
             if self.manner == "soft":
                 self._hard_pruned = 0
                 prune_count = self._soft_pruned = self.prune(percentage, self.soft_prune)
